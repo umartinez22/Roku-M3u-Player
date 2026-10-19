@@ -1,28 +1,173 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--********** Copyright 2016 Roku Corp.  All Rights Reserved. **********-->
-
 <component name="MainScene" extends="Scene" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://rokudev.roku.com/rokudev/schema/RokuSceneGraph.xsd">
-<script type="text/brightscript" uri="pkg:/components/MainScene/MainScene.brs"/>
-<children>
-    <LabelList
-    	id="list"
-    	translation = "[150, 150]"
-    	/>
-    	
-    <Video
-    id="Video"
-    translation = "[800, 100]"
-    width = "960"
-    height= "540"/>
-    
-    <get_channel_list
-    	id="get_channel_list"
-    	control="STOP"/>
-    	
-    <save_feed_url
-    	id="save_feed_url"
-    	control="STOP"/>
-    	
-</children>
+    <script type="text/brightscript" uri="pkg:/components/MainScene/MainScene.brs"/>
+    <children>
+        <Rectangle
+            width="1920"
+            height="1080"
+            color="0x0B1020FF"/>
+
+        <Group id="chrome">
+            <Rectangle
+                translation="[0, 0]"
+                width="1920"
+                height="7"
+                color="0x3986FFFF"/>
+
+            <Rectangle
+                translation="[80, 65]"
+                width="7"
+                height="48"
+                color="0x3986FFFF"/>
+            <Label
+                translation="[108, 59]"
+                width="360"
+                height="54"
+                text="ROKU M3U PLAYER"
+                color="0xFFFFFFFF"
+                font="font:MediumBoldSystemFont"/>
+            <Label
+                translation="[1490, 65]"
+                width="330"
+                height="42"
+                text="TU ENTRETENIMIENTO, EN VIVO"
+                color="0x8F9BB0FF"
+                font="font:MediumSystemFont"
+                horizAlign="right"/>
+
+            <Rectangle
+                translation="[80, 157]"
+                width="560"
+                height="752"
+                color="0x111A2BFF"/>
+            <Label
+                translation="[110, 181]"
+                width="480"
+                height="44"
+                text="Canales"
+                color="0xFFFFFFFF"
+                font="font:MediumBoldSystemFont"/>
+            <Label
+                translation="[110, 225]"
+                width="480"
+                height="34"
+                text="Explora tu lista y elige qué ver"
+                color="0x8F9BB0FF"
+                font="font:SmallSystemFont"/>
+            <Rectangle
+                translation="[110, 267]"
+                width="500"
+                height="2"
+                color="0x26334AFF"/>
+            <LabelList
+                id="list"
+                translation="[104, 283]"
+                itemSize="[510, 54]"
+                itemSpacing="[0, 7]"
+                numRows="9"
+                color="0xB8C1D1FF"
+                focusedColor="0xFFFFFFFF"
+                font="font:MediumSystemFont"
+                focusedFont="font:MediumBoldSystemFont"
+                sectionDividerTextColor="0x75A9FFFF"
+                sectionDividerFont="font:MediumBoldSystemFont"
+                sectionDividerHeight="42"
+                focusBitmapBlendColor="0x3986FFFF"/>
+
+            <Label
+                translation="[110, 858]"
+                width="500"
+                height="30"
+                text="Pulsa OK para reproducir un canal"
+                color="0x71809AFF"
+                font="font:SmallSystemFont"/>
+
+            <Rectangle
+                translation="[680, 157]"
+                width="1160"
+                height="752"
+                color="0x111A2BFF"/>
+            <Label
+                translation="[720, 181]"
+                width="500"
+                height="44"
+                text="Reproductor"
+                color="0xFFFFFFFF"
+                font="font:MediumBoldSystemFont"/>
+            <Label
+                id="playerSubtitle"
+                translation="[720, 225]"
+                width="1020"
+                height="34"
+                text="Tu canal aparecerá aquí"
+                color="0x8F9BB0FF"
+                font="font:SmallSystemFont"/>
+            <Rectangle
+                translation="[720, 268]"
+                width="1080"
+                height="2"
+                color="0x26334AFF"/>
+
+            <Label
+                translation="[80, 959]"
+                width="500"
+                height="34"
+                text="↑ ↓  Explorar canales"
+                color="0xAAB5C8FF"
+                font="font:SmallSystemFont"/>
+            <Label
+                translation="[585, 959]"
+                width="500"
+                height="34"
+                text="OPTIONS  Cambiar lista"
+                color="0xAAB5C8FF"
+                font="font:SmallSystemFont"/>
+            <Label
+                translation="[1320, 959]"
+                width="520"
+                height="34"
+                text="DERECHA  Pantalla completa"
+                color="0xAAB5C8FF"
+                font="font:SmallSystemFont"
+                horizAlign="right"/>
+        </Group>
+
+        <Video
+            id="Video"
+            translation="[720, 290]"
+            width="1080"
+            height="608"/>
+
+        <Group id="emptyState" translation="[720, 290]">
+            <Rectangle
+                width="1080"
+                height="608"
+                color="0x0B1020FF"/>
+            <Label
+                translation="[80, 238]"
+                width="920"
+                height="56"
+                text="Selecciona un canal"
+                color="0xFFFFFFFF"
+                font="font:MediumBoldSystemFont"
+                horizAlign="center"/>
+            <Label
+                translation="[80, 294]"
+                width="920"
+                height="42"
+                text="para empezar a reproducir"
+                color="0x8F9BB0FF"
+                font="font:MediumSystemFont"
+                horizAlign="center"/>
+        </Group>
+
+        <get_channel_list
+            id="get_channel_list"
+            control="STOP"/>
+
+        <save_feed_url
+            id="save_feed_url"
+            control="STOP"/>
+    </children>
 </component>

@@ -1,15 +1,19 @@
 sub init()
-    m.top.backgroundURI = "pkg:/images/background-controls.jpg"
+    m.top.backgroundURI = ""
+    m.top.backgroundColor = "0x0B1020FF"
 
     m.save_feed_url = m.top.FindNode("save_feed_url")  'Save url to registry
 
     m.get_channel_list = m.top.FindNode("get_channel_list") 'get url from registry and parse the feed
     m.get_channel_list.ObserveField("content", "SetContent") 'Is thre content parsed? If so, goto SetContent sub and dsipay list
 
+    m.chrome = m.top.FindNode("chrome")
+    m.emptyState = m.top.FindNode("emptyState")
     m.list = m.top.FindNode("list")
     m.list.ObserveField("itemSelected", "setChannel") 
 
     m.video = m.top.FindNode("Video")
+    m.playerSubtitle = m.top.FindNode("playerSubtitle")
     m.video.ObserveField("state", "checkState")
 
     showdialog()  'Force a keyboard dialog.
@@ -26,21 +30,27 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
         if(key = "right")
             m.list.SetFocus(false)
             m.top.SetFocus(true)
+            m.chrome.visible = false
+            m.emptyState.visible = false
             m.video.translation = [0, 0]
-            m.video.width = 0
-            m.video.height = 0
+            m.video.width = 1920
+            m.video.height = 1080
             result = true
         else if(key = "left")
+            m.chrome.visible = true
             m.list.SetFocus(true)
-            m.video.translation = [800, 100]
-            m.video.width = 960
-            m.video.height = 540
+            m.video.translation = [720, 290]
+            m.video.width = 1080
+            m.video.height = 608
+            m.emptyState.visible = (m.video.content = invalid)
             result = true
         else if(key = "back")
+            m.chrome.visible = true
             m.list.SetFocus(true)
-            m.video.translation = [800, 100]
-            m.video.width = 960
-            m.video.height = 540
+            m.video.translation = [720, 290]
+            m.video.width = 1080
+            m.video.height = 608
+            m.emptyState.visible = (m.video.content = invalid)
             result = true
         else if(key = "options")
             showdialog()
@@ -90,7 +100,8 @@ sub setChannel()
 
 	m.video.content = content
 
-	m.top.backgroundURI = "pkg:/images/rsgde_bg_hd.jpg"
+	m.playerSubtitle.text = content.title
+	m.emptyState.visible = false
 	m.video.trickplaybarvisibilityauto = false
 
 	m.video.control = "play"
@@ -102,9 +113,9 @@ sub showdialog()
 
     keyboarddialog = createObject("roSGNode", "KeyboardDialog")
     keyboarddialog.backgroundUri = "pkg:/images/rsgde_bg_hd.jpg"
-    keyboarddialog.title = "ENTER PLAYLIST HERE"
+    keyboarddialog.title = "DIRECCIÓN DE LISTA M3U"
 
-    keyboarddialog.buttons=["OK", "Default", "Save"]
+    keyboarddialog.buttons=["Cargar", "Usar actual", "Guardar"]
     keyboarddialog.optionsDialog = true
 
     m.top.dialog = keyboarddialog
